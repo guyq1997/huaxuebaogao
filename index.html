@@ -1,706 +1,269 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>黑森林滑雪场开放情况</title>
+    <title>柏林旅行行程 (2025年4月18-21日)</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
+            color: #333;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #f8f9fa;
         }
         h1, h2 {
             color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
         }
-        .resort-card {
+        .container {
             background-color: white;
-            border: 1px solid #ddd;
             border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
-        .resort-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .status {
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .status.open {
-            background-color: #2ecc71;
+        .day-title {
+            background-color: #3498db;
             color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 0;
         }
-        .status.closed {
-            background-color: #e74c3c;
-            color: white;
-        }
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .info-section {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-        }
-        .last-updated {
-            text-align: right;
-            color: #7f8c8d;
-            font-size: 0.9em;
-            margin-top: 20px;
-        }
-        .slope-details {
-            margin-top: 15px;
-            grid-column: 1 / -1;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .slope-details table {
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
-            background-color: white;
+            margin-bottom: 20px;
         }
-        .slope-details th, .slope-details td {
-            padding: 12px;
+        th, td {
+            padding: 12px 15px;
             text-align: left;
-            border: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
         }
-        .slope-details th {
-            background-color: #f1f1f1;
+        th {
+            background-color: #f2f2f2;
             font-weight: bold;
         }
-        .slope-details tr:nth-child(even) {
+        .time {
+            width: 15%;
+            white-space: nowrap;
+        }
+        .activity {
+            width: 30%;
+        }
+        .details {
+            width: 55%;
+        }
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .note {
             background-color: #f9f9f9;
-        }
-        .info-section a {
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .info-section a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-        .snow-report {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .snow-report h3 {
-            grid-column: 1 / -1;
-            margin-top: 0;
-            color: #2c3e50;
-            font-size: 1.4em;
-        }
-        .snow-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+            padding: 10px;
+            border-left: 4px solid #3498db;
             margin: 15px 0;
         }
-        .stat-item {
-            background: white;
-            padding: 12px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .stat-item strong {
-            display: block;
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        .facilities-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .facilities-list ul {
-            margin: 0;
-            padding-left: 20px;
-            list-style-type: none;
-        }
-        .facilities-list li {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 8px;
-        }
-        .facilities-list li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #3498db;
-        }
-        .snow-report a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-        .snow-report a:hover {
-            background-color: #2980b9;
-        }
-        .general-info {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: white;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-        .general-info ul {
-            margin: 0;
-            padding-left: 20px;
-        }
         @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
+            table, thead, tbody, th, td, tr {
+                display: block;
             }
-            .slope-details {
-                font-size: 0.9em;
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
             }
-            .snow-report {
-                grid-template-columns: 1fr;
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
             }
-        }
-        .snow-conditions {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .conditions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .condition-card {
-            background: white;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .condition-card h4 {
-            color: #2c3e50;
-            margin: 0 0 15px 0;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .condition-value {
-            font-size: 1.8em;
-            color: #3498db;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .slopes-overview {
-            margin-top: 25px;
-            background: white;
-            padding: 25px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .slopes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .slope-type {
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 4px solid;
-        }
-        .slope-type.beginner { border-left-color: #2ecc71; }
-        .slope-type.intermediate { border-left-color: #3498db; }
-        .slope-type.advanced { border-left-color: #e74c3c; }
-        .slope-count {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin: 5px 0;
-        }
-        .live-status {
-            margin-top: 25px;
-            text-align: center;
-        }
-        .live-status a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 25px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-        }
-        .live-status a:hover {
-            background-color: #2980b9;
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: left;
+            }
+            td:before {
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+            }
+            td:nth-of-type(1):before { content: "时间"; }
+            td:nth-of-type(2):before { content: "活动"; }
+            td:nth-of-type(3):before { content: "详情"; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>黑森林滑雪场开放情况</h1>
-        <p>2024年2月22日至23日最新信息</p>
+        <h1>柏林旅行行程 (2025年4月18-21日)</h1>
+        
+        <!-- 第一天 -->
+        <h2 class="day-title">第一天 (4月18日，周五)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="time">时间</th>
+                    <th class="activity">活动</th>
+                    <th class="details">详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15:00 - 17:00</td>
+                    <td>抵达柏林并办理入住</td>
+                    <td>抵达酒店/住宿地点，办理入住手续并短暂休息。</td>
+                </tr>
+                <tr>
+                    <td>17:30 - 19:00</td>
+                    <td>勃兰登堡门</td>
+                    <td>参观柏林最具代表性的地标建筑，拍照留念。</td>
+                </tr>
+                <tr>
+                    <td>19:30 - 21:30</td>
+                    <td>晚餐 @ Zur letzten Instanz</td>
+                    <td>在柏林最古老的餐厅享用正宗德国菜。推荐招牌菜：烤猪肘配酸菜与豌豆泥。<span class="highlight">需提前预约</span>！</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 第二天 -->
+        <h2 class="day-title">第二天 (4月19日，周六)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="time">时间</th>
+                    <th class="activity">活动</th>
+                    <th class="details">详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>09:30 - 11:00</td>
+                    <td>国会大厦</td>
+                    <td>参观德国国会大厦及其著名的玻璃圆顶。<span class="highlight">需提前网上预约</span>！从圆顶俯瞰柏林全景。</td>
+                </tr>
+                <tr>
+                    <td>11:30 - 12:30</td>
+                    <td>大屠杀纪念碑</td>
+                    <td>参观这处意义深远的人文景观，感受历史的沉重与反思。</td>
+                </tr>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td>午餐 @ Maximilians Restaurant</td>
+                    <td>品尝正宗的巴伐利亚料理，位于弗里德里希大街，紧邻御林广场。推荐尝试慕尼黑白香肠或芝士面疙瘩。</td>
+                </tr>
+                <tr>
+                    <td>14:30 - 17:30</td>
+                    <td>博物馆岛 (Museumsinsel)</td>
+                    <td>参观世界文化遗产博物馆岛，重点参观新博物馆(埃及艳后娜芙蒂蒂半身像)和佩加蒙全景展。购买博物馆岛一日通票约24欧元。</td>
+                </tr>
+                <tr>
+                    <td>18:00 - 19:30</td>
+                    <td>晚餐 @ Goji 粤菜点心店</td>
+                    <td>位于舍嫩贝格区的高评分中餐厅，品尝地道的广式点心和粤菜。推荐虾饺、烧麦、肠粉等。</td>
+                </tr>
+                <tr>
+                    <td>20:30 - 23:00</td>
+                    <td>Zig Zag Jazz Club 爵士之夜</td>
+                    <td>在柏林著名的爵士俱乐部欣赏Chico Freeman Exotica的现场表演。<span class="highlight">建议提前预约座位</span>！入场免费，但建议在中场休息时自愿捐款。</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 第三天 -->
+        <h2 class="day-title">第三天 (4月20日，周日)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="time">时间</th>
+                    <th class="activity">活动</th>
+                    <th class="details">详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10:00 - 12:00</td>
+                    <td>东边画廊 (East Side Gallery)</td>
+                    <td>参观柏林墙最长的遗迹段落，欣赏118位艺术家创作的壁画，包括著名的"领导人的拥吻"等作品。</td>
+                </tr>
+                <tr>
+                    <td>12:30 - 13:30</td>
+                    <td>快餐体验 @ Curry 36</td>
+                    <td>品尝柏林特色小吃 - 咖喱香肠 (Currywurst)，感受当地街头美食文化。</td>
+                </tr>
+                <tr>
+                    <td>14:00 - 15:00</td>
+                    <td>查理检查站 (Checkpoint Charlie)</td>
+                    <td>参观冷战时期美苏占领区之间的著名边境检查站旧址，拍照留念。可选择参观旁边的小型博物馆。</td>
+                </tr>
+                <tr>
+                    <td>15:30 - 17:00</td>
+                    <td>柏林墙纪念公园</td>
+                    <td>参观保存完好的柏林墙遗址，了解冷战时期东西柏林分裂的历史。参观纪念公园、展览和纪念碑。</td>
+                </tr>
+                <tr>
+                    <td>17:30 - 19:30</td>
+                    <td>晚餐 @ Ming Dynastie 明朝饭店</td>
+                    <td>在柏林的老牌中餐馆品尝北京菜和四川菜。推荐北京烤鸭、水煮鱼等招牌菜。</td>
+                </tr>
+                <tr>
+                    <td>20:00 - 24:00</td>
+                    <td>Vabali Spa 养生之旅</td>
+                    <td>在柏林市中心的巴厘岛风情温泉桑拿会馆放松身心。<span class="highlight">建议提前预约</span>！体验多种桑拿房、泳池和休闲区域。推荐参加每小时的"Aufguss"香薰增温仪式。<br>票价：4小时票周末/假日€39.50。<span class="highlight">温馨提示：德国桑拿传统为裸浴混浴制，桑拿和泳池区域禁止穿泳衣</span></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- 第四天 -->
+        <h2 class="day-title">第四天 (4月21日，周一 - 复活节)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="time">时间</th>
+                    <th class="activity">活动</th>
+                    <th class="details">详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10:00 - 12:00</td>
+                    <td>御林广场 (Gendarmenmarkt)</td>
+                    <td>游览柏林最美丽的广场之一，欣赏两座相对的德法大教堂和中央音乐厅构成的和谐画面。</td>
+                </tr>
+                <tr>
+                    <td>12:30 - 14:00</td>
+                    <td>午餐 @ Jolly 餐厅</td>
+                    <td>在著名中餐馆用餐。推荐尝试北京烤鸭和广式点心。</td>
+                </tr>
+                <tr>
+                    <td>14:30 - 16:30</td>
+                    <td>博物馆岛补充参观</td>
+                    <td>利用复活节假日特殊开放时间，补充参观博物馆岛上错过的展馆，如老国家美术馆或老博物馆。您的博物馆岛通票可能仍然有效（如购买了柏林通票）。</td>
+                </tr>
 
-        <div class="resort-card">
-            <div class="resort-header">
-                <h2>Feldberg 费尔德贝格滑雪场</h2>
-                <span class="status open">开放</span>
-            </div>
-            <div class="snow-conditions">
-                <h3>雪场概况</h3>
-                <div class="conditions-grid">
-                    <div class="condition-card">
-                        <h4>海拔范围</h4>
-                        <div class="condition-value">1200-1450m</div>
-                        <p>垂直落差：250米</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>总雪道长度</h4>
-                        <div class="condition-value">29km</div>
-                        <p>当前开放：17公里</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>营业时间</h4>
-                        <div class="condition-value">9:00-16:30</div>
-                        <p>每日开放</p>
-                    </div>
-                </div>
-
-                <div class="slopes-overview">
-                    <h4>雪道分布</h4>
-                    <div class="slopes-grid">
-                        <div class="slope-type beginner">
-                            <h5>初级道</h5>
-                            <div class="slope-count">6条</div>
-                            <p>适合初学者</p>
-                        </div>
-                        <div class="slope-type intermediate">
-                            <h5>中级道</h5>
-                            <div class="slope-count">8条</div>
-                            <p>适合进阶滑雪者</p>
-                        </div>
-                        <div class="slope-type advanced">
-                            <h5>高级道</h5>
-                            <div class="slope-count">2条</div>
-                            <p>含世界杯级别赛道</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-status">
-                    <a href="https://www.feldberg-erlebnis.de/schneebericht/detail#/skiArea/cacf9ef5-cead-43ee-8d9d-720fa32249f5" target="_blank">
-                        查看实时雪道状态 →
-                    </a>
-                </div>
-            </div>
-            <div class="info-grid">
-                <div class="info-section">
-                    <h3>位置和交通</h3>
-                    <ul>
-                        <li>距离斯图加特：132公里</li>
-                        <li>开车时间：约2小时</li>
-                        <li><a href="https://www.openstreetmap.org/directions?from=Stuttgart&to=47.8741,8.0375" target="_blank">在OpenStreetMap上查看路线</a></li>
-                    </ul>
-                </div>
-                <div class="info-section">
-                    <h3>设施情况</h3>
-                    <ul>
-                        <li>提供滑雪学校</li>
-                        <li>现场租赁设备</li>
-                        <li>4个趣味滑道</li>
-                        <li>餐厅和咖啡厅</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="resort-card">
-            <div class="resort-header">
-                <h2>Mehliskopf 梅利斯科普夫滑雪场</h2>
-                <span class="status open">开放</span>
-            </div>
-            <div class="snow-conditions">
-                <h3>雪场概况</h3>
-                <div class="conditions-grid">
-                    <div class="condition-card">
-                        <h4>海拔范围</h4>
-                        <div class="condition-value">800-900m</div>
-                        <p>垂直落差：100米</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>总雪道长度</h4>
-                        <div class="condition-value">1.2km</div>
-                        <p>含夜间滑雪道</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>营业时间</h4>
-                        <div class="condition-value">9:00-22:00</div>
-                        <p>提供夜间滑雪</p>
-                    </div>
-                </div>
-
-                <div class="slopes-overview">
-                    <h4>雪道分布</h4>
-                    <div class="slopes-grid">
-                        <div class="slope-type beginner">
-                            <h5>初级道</h5>
-                            <div class="slope-count">1条</div>
-                            <p>适合初学者</p>
-                        </div>
-                        <div class="slope-type intermediate">
-                            <h5>中级道</h5>
-                            <div class="slope-count">1条</div>
-                            <p>适合进阶滑雪者</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-status">
-                    <a href="https://mehliskopf.de/winter/unsere-skilifte" target="_blank">
-                        查看实时雪道状态 →
-                    </a>
-                </div>
-            </div>
-            <div class="info-grid">
-                <div class="info-section">
-                    <h3>位置和交通</h3>
-                    <ul>
-                        <li>距离斯图加特：110公里</li>
-                        <li>开车时间：约1.5小时</li>
-                        <li><a href="https://www.openstreetmap.org/directions?from=Stuttgart&to=48.6647,8.3308" target="_blank">在OpenStreetMap上查看路线</a></li>
-                    </ul>
-                </div>
-                <div class="info-section">
-                    <h3>设施情况</h3>
-                    <ul>
-                        <li>提供滑雪学校</li>
-                        <li>可租赁设备</li>
-                        <li>夜间滑雪</li>
-                        <li>4个拖牵式缆车</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="resort-card">
-            <div class="resort-header">
-                <h2>Todtnauberg 托特瑙贝格滑雪场</h2>
-                <span class="status open">开放</span>
-            </div>
-            <div class="snow-conditions">
-                <h3>雪场概况</h3>
-                <div class="conditions-grid">
-                    <div class="condition-card">
-                        <h4>海拔范围</h4>
-                        <div class="condition-value">1000-1400m</div>
-                        <p>垂直落差：400米</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>总雪道长度</h4>
-                        <div class="condition-value">13km</div>
-                        <p>16条多样化雪道</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>营业时间</h4>
-                        <div class="condition-value">9:30-16:30</div>
-                        <p>提供夜间滑雪</p>
-                    </div>
-                </div>
-
-                <div class="slopes-overview">
-                    <h4>雪道分布</h4>
-                    <div class="slopes-grid">
-                        <div class="slope-type beginner">
-                            <h5>初级道</h5>
-                            <div class="slope-count">6条</div>
-                            <p>适合初学者</p>
-                        </div>
-                        <div class="slope-type intermediate">
-                            <h5>中级道</h5>
-                            <div class="slope-count">8条</div>
-                            <p>适合进阶滑雪者</p>
-                        </div>
-                        <div class="slope-type advanced">
-                            <h5>高级道</h5>
-                            <div class="slope-count">2条</div>
-                            <p>挑战性雪道</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-status">
-                    <a href="https://www.skilifte-todtnauberg.de/aktuelles-2#Schneebericht" target="_blank">
-                        查看实时雪道状态 →
-                    </a>
-                </div>
-            </div>
-            <div class="info-grid">
-                <div class="info-section">
-                    <h3>位置和交通</h3>
-                    <ul>
-                        <li>距离斯图加特：145公里</li>
-                        <li>开车时间：约2.5小时</li>
-                        <li><a href="https://www.openstreetmap.org/directions?from=Stuttgart&to=47.9019,7.9397" target="_blank">在OpenStreetMap上查看路线</a></li>
-                    </ul>
-                </div>
-                <div class="info-section">
-                    <h3>设施情况</h3>
-                    <ul>
-                        <li>提供滑雪学校和儿童区</li>
-                        <li>设备租赁</li>
-                        <li>免费停车场</li>
-                        <li>提供夜间滑雪</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="resort-card">
-            <div class="resort-header">
-                <h2>Belchen 贝尔亨滑雪场</h2>
-                <span class="status open">开放</span>
-            </div>
-            <div class="snow-conditions">
-                <h3>雪场概况</h3>
-                <div class="conditions-grid">
-                    <div class="condition-card">
-                        <h4>海拔范围</h4>
-                        <div class="condition-value">1000-1365m</div>
-                        <p>垂直落差：365米</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>总雪道长度</h4>
-                        <div class="condition-value">5km</div>
-                        <p>多条难度各异雪道</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>营业时间</h4>
-                        <div class="condition-value">9:00-16:30</div>
-                        <p>12月24日-3月9日</p>
-                    </div>
-                </div>
-
-                <div class="slopes-overview">
-                    <h4>雪道分布</h4>
-                    <div class="slopes-grid">
-                        <div class="slope-type beginner">
-                            <h5>初级道</h5>
-                            <div class="slope-count">2条</div>
-                            <p>适合初学者</p>
-                        </div>
-                        <div class="slope-type intermediate">
-                            <h5>中级道</h5>
-                            <div class="slope-count">2条</div>
-                            <p>适合进阶滑雪者</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-status">
-                    <a href="https://www.belchen-seilbahn.de/belchen_pisten.html" target="_blank">
-                        查看实时雪道状态 →
-                    </a>
-                </div>
-            </div>
-            <div class="info-grid">
-                <div class="info-section">
-                    <h3>位置和交通</h3>
-                    <ul>
-                        <li>距离斯图加特：140公里</li>
-                        <li>开车时间：约2.5小时</li>
-                        <li><a href="https://www.openstreetmap.org/directions?from=Stuttgart&to=47.9022,7.8672" target="_blank">在OpenStreetMap上查看路线</a></li>
-                    </ul>
-                </div>
-                <div class="info-section">
-                    <h3>设施情况</h3>
-                    <ul>
-                        <li>提供滑雪学校</li>
-                        <li>现场租赁设备</li>
-                        <li>提供停车场</li>
-                        <li>山顶餐厅</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="resort-card">
-            <div class="resort-header">
-                <h2>Kandel 坎德尔滑雪场</h2>
-                <span class="status open">开放</span>
-            </div>
-            <div class="snow-conditions">
-                <h3>雪场概况</h3>
-                <div class="conditions-grid">
-                    <div class="condition-card">
-                        <h4>海拔范围</h4>
-                        <div class="condition-value">1055-1210m</div>
-                        <p>垂直落差：155米</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>营业时间</h4>
-                        <div class="condition-value">9:00-17:00</div>
-                        <p>11月22日-4月5日</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>特色</h4>
-                        <div class="condition-value">家庭友好</div>
-                        <p>适合初学者</p>
-                    </div>
-                </div>
-
-                <div class="slopes-overview">
-                    <h4>雪道分布</h4>
-                    <div class="slopes-grid">
-                        <div class="slope-type beginner">
-                            <h5>初级道</h5>
-                            <div class="slope-count">3条</div>
-                            <p>适合初学者</p>
-                        </div>
-                        <div class="slope-type intermediate">
-                            <h5>中级道</h5>
-                            <div class="slope-count">1条</div>
-                            <p>适合进阶滑雪者</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-status">
-                    <a href="https://www.kandellifte.de/home.html" target="_blank">
-                        查看实时雪道状态 →
-                    </a>
-                </div>
-            </div>
-            <div class="info-grid">
-                <div class="info-section">
-                    <h3>位置和交通</h3>
-                    <ul>
-                        <li>距离斯图加特：99公里</li>
-                        <li>开车时间：约1.8小时</li>
-                        <li><a href="https://www.openstreetmap.org/directions?from=Stuttgart&to=48.0647,8.0156" target="_blank">在OpenStreetMap上查看路线</a></li>
-                    </ul>
-                </div>
-                <div class="info-section">
-                    <h3>设施情况</h3>
-                    <ul>
-                        <li>提供滑雪学校</li>
-                        <li>现场租赁设备</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="resort-card">
-            <div class="resort-header">
-                <h2>Muggenbrunn 穆根布伦滑雪场</h2>
-                <span class="status open">开放</span>
-            </div>
-            <div class="snow-conditions">
-                <h3>雪场概况</h3>
-                <div class="conditions-grid">
-                    <div class="condition-card">
-                        <h4>海拔范围</h4>
-                        <div class="condition-value">980-1240m</div>
-                        <p>垂直落差：260米</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>总雪道长度</h4>
-                        <div class="condition-value">8km</div>
-                        <p>最长雪道：1公里</p>
-                    </div>
-                    <div class="condition-card">
-                        <h4>营业时间</h4>
-                        <div class="condition-value">9:00-16:30</div>
-                        <p>11月23日-3月16日</p>
-                    </div>
-                </div>
-
-                <div class="slopes-overview">
-                    <h4>雪道分布</h4>
-                    <div class="slopes-grid">
-                        <div class="slope-type beginner">
-                            <h5>初级道</h5>
-                            <div class="slope-count">5条</div>
-                            <p>适合初学者</p>
-                        </div>
-                        <div class="slope-type intermediate">
-                            <h5>中级道</h5>
-                            <div class="slope-count">5条</div>
-                            <p>适合进阶滑雪者</p>
-                        </div>
-                        <div class="slope-type advanced">
-                            <h5>高级道</h5>
-                            <div class="slope-count">2条</div>
-                            <p>含夜间滑雪道</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="live-status">
-                    <a href="https://www.skizentrum-muggenbrunn.de/" target="_blank">
-                        查看实时雪道状态 →
-                    </a>
-                </div>
-            </div>
-            <div class="info-grid">
-                <div class="info-section">
-                    <h3>位置和交通</h3>
-                    <ul>
-                        <li>距离斯图加特：135公里</li>
-                        <li>开车时间：约2.2小时</li>
-                        <li><a href="https://www.openstreetmap.org/directions?from=Stuttgart&to=47.8561,7.9397" target="_blank">在OpenStreetMap上查看路线</a></li>
-                    </ul>
-                </div>
-                <div class="info-section">
-                    <h3>设施情况</h3>
-                    <ul>
-                        <li>提供滑雪学校</li>
-                        <li>现场租赁设备</li>
-                        <li>单板公园</li>
-                        <li>可夜间滑雪</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="last-updated">
-            <p>最后更新时间：2024年2月21日 18:00</p>
+            </tbody>
+        </table>
+        
+        <div class="note">
+            <p><strong>重要提示：</strong></p>
+            <ul>
+                <li>德国国会大厦和Vabali Spa强烈建议提前在线预约</li>
+                <li>周末和假日餐厅高峰期建议提前预订座位</li>
+                <li>博物馆岛各馆通常10:00-18:00开放，复活节星期一特别开放</li>
+                <li>德国桑拿传统为裸浴混浴制，Vabali Spa在桑拿和泳池区域禁止穿泳衣</li>
+                <li>行程可根据实际情况灵活调整，保持开放心态享受旅程</li>
+            </ul>
         </div>
     </div>
 </body>
