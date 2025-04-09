@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>柏林旅行行程 (2025年4月18-21日)</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -36,6 +37,24 @@
             padding: 10px 15px;
             border-radius: 5px;
             margin-top: 0;
+        }
+        .day-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .schedule {
+            flex: 1;
+            min-width: 300px;
+        }
+        .map-container {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         table {
             width: 100%;
@@ -72,6 +91,13 @@
             margin: 15px 0;
         }
         @media (max-width: 768px) {
+            .day-content {
+                flex-direction: column;
+            }
+            .map-container {
+                height: 300px;
+                order: -1;
+            }
             table, thead, tbody, th, td, tr {
                 display: block;
             }
@@ -110,150 +136,174 @@
         
         <!-- 第一天 -->
         <h2 class="day-title">第一天 (4月18日，周五)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class="time">时间</th>
-                    <th class="activity">活动</th>
-                    <th class="details">详情</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>15:00 - 17:00</td>
-                    <td>抵达柏林并办理入住</td>
-                    <td>抵达酒店/住宿地点，办理入住手续并短暂休息。</td>
-                </tr>
-                <tr>
-                    <td>17:30 - 19:00</td>
-                    <td>勃兰登堡门</td>
-                    <td>参观柏林最具代表性的地标建筑，拍照留念。</td>
-                </tr>
-                <tr>
-                    <td>19:30 - 21:30</td>
-                    <td>晚餐 @ Zur letzten Instanz</td>
-                    <td>在柏林最古老的餐厅享用正宗德国菜。推荐招牌菜：烤猪肘配酸菜与豌豆泥。<span class="highlight">需提前预约</span>！</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="day-content">
+            <div class="schedule">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="time">时间</th>
+                            <th class="activity">活动</th>
+                            <th class="details">详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15:00 - 17:00</td>
+                            <td>抵达柏林并办理入住</td>
+                            <td>抵达酒店/住宿地点，办理入住手续并短暂休息。</td>
+                        </tr>
+                        <tr>
+                            <td>17:30 - 19:00</td>
+                            <td>勃兰登堡门</td>
+                            <td>参观柏林最具代表性的地标建筑，拍照留念。</td>
+                        </tr>
+                        <tr>
+                            <td>19:30 - 21:30</td>
+                            <td>晚餐 @ Zur letzten Instanz</td>
+                            <td>在柏林最古老的餐厅享用正宗德国菜。推荐招牌菜：烤猪肘配酸菜与豌豆泥。<span class="highlight">需提前预约</span>！</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="map-day1" class="map-container"></div>
+        </div>
         
         <!-- 第二天 -->
         <h2 class="day-title">第二天 (4月19日，周六)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class="time">时间</th>
-                    <th class="activity">活动</th>
-                    <th class="details">详情</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>09:30 - 11:00</td>
-                    <td>国会大厦</td>
-                    <td>参观德国国会大厦及其著名的玻璃圆顶。<span class="highlight">需提前网上预约</span>！从圆顶俯瞰柏林全景。</td>
-                </tr>
-                <tr>
-                    <td>11:30 - 12:30</td>
-                    <td>大屠杀纪念碑</td>
-                    <td>参观这处意义深远的人文景观，感受历史的沉重与反思。</td>
-                </tr>
-                <tr>
-                    <td>13:00 - 14:00</td>
-                    <td>午餐 @ Maximilians Restaurant</td>
-                    <td>品尝正宗的巴伐利亚料理，位于弗里德里希大街，紧邻御林广场。推荐尝试慕尼黑白香肠或芝士面疙瘩。</td>
-                </tr>
-                <tr>
-                    <td>14:30 - 17:30</td>
-                    <td>博物馆岛 (Museumsinsel)</td>
-                    <td>参观世界文化遗产博物馆岛，重点参观新博物馆(埃及艳后娜芙蒂蒂半身像)和佩加蒙全景展。购买博物馆岛一日通票约24欧元。</td>
-                </tr>
-                <tr>
-                    <td>18:00 - 19:30</td>
-                    <td>晚餐 @ Goji 粤菜点心店</td>
-                    <td>位于舍嫩贝格区的高评分中餐厅，品尝地道的广式点心和粤菜。推荐虾饺、烧麦、肠粉等。</td>
-                </tr>
-                <tr>
-                    <td>20:30 - 23:00</td>
-                    <td>Zig Zag Jazz Club 爵士之夜</td>
-                    <td>在柏林著名的爵士俱乐部欣赏Chico Freeman Exotica的现场表演。<span class="highlight">建议提前预约座位</span>！入场免费，但建议在中场休息时自愿捐款。</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="day-content">
+            <div class="schedule">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="time">时间</th>
+                            <th class="activity">活动</th>
+                            <th class="details">详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09:30 - 11:00</td>
+                            <td>国会大厦</td>
+                            <td>参观德国国会大厦及其著名的玻璃圆顶。<span class="highlight">需提前网上预约</span>！从圆顶俯瞰柏林全景。</td>
+                        </tr>
+                        <tr>
+                            <td>11:30 - 12:30</td>
+                            <td>大屠杀纪念碑</td>
+                            <td>参观这处意义深远的人文景观，感受历史的沉重与反思。</td>
+                        </tr>
+                        <tr>
+                            <td>13:00 - 14:00</td>
+                            <td>午餐 @ Maximilians Restaurant</td>
+                            <td>品尝正宗的巴伐利亚料理，位于弗里德里希大街，紧邻御林广场。推荐尝试慕尼黑白香肠或芝士面疙瘩。</td>
+                        </tr>
+                        <tr>
+                            <td>14:30 - 17:30</td>
+                            <td>博物馆岛 (Museumsinsel)</td>
+                            <td>参观世界文化遗产博物馆岛，重点参观新博物馆(埃及艳后娜芙蒂蒂半身像)和佩加蒙全景展。购买博物馆岛一日通票约24欧元。</td>
+                        </tr>
+                        <tr>
+                            <td>18:00 - 19:00</td>
+                            <td>晚餐 @ 柏林烧烤匠</td>
+                            <td>位于柏林市中心的中式烧烤餐厅，提供正宗中国烤串和各式烧烤。推荐尝试羊肉串、烤鱼和烤韭菜等经典烧烤美食，搭配冰镇啤酒。</td>
+                        </tr>
+                        <tr>
+                            <td>20:30 - 23:00</td>
+                            <td>Zig Zag Jazz Club 爵士之夜</td>
+                            <td>在柏林著名的爵士俱乐部欣赏Chico Freeman Exotica的现场表演。<span class="highlight">建议提前预约座位</span>！入场免费，但建议在中场休息时自愿捐款。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="map-day2" class="map-container"></div>
+        </div>
         
         <!-- 第三天 -->
         <h2 class="day-title">第三天 (4月20日，周日)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class="time">时间</th>
-                    <th class="activity">活动</th>
-                    <th class="details">详情</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10:00 - 12:00</td>
-                    <td>东边画廊 (East Side Gallery)</td>
-                    <td>参观柏林墙最长的遗迹段落，欣赏118位艺术家创作的壁画，包括著名的"领导人的拥吻"等作品。</td>
-                </tr>
-                <tr>
-                    <td>12:30 - 13:30</td>
-                    <td>快餐体验 @ Curry 36</td>
-                    <td>品尝柏林特色小吃 - 咖喱香肠 (Currywurst)，感受当地街头美食文化。</td>
-                </tr>
-                <tr>
-                    <td>14:00 - 15:00</td>
-                    <td>查理检查站 (Checkpoint Charlie)</td>
-                    <td>参观冷战时期美苏占领区之间的著名边境检查站旧址，拍照留念。可选择参观旁边的小型博物馆。</td>
-                </tr>
-                <tr>
-                    <td>15:30 - 17:00</td>
-                    <td>柏林墙纪念公园</td>
-                    <td>参观保存完好的柏林墙遗址，了解冷战时期东西柏林分裂的历史。参观纪念公园、展览和纪念碑。</td>
-                </tr>
-                <tr>
-                    <td>17:30 - 19:30</td>
-                    <td>晚餐 @ Ming Dynastie 明朝饭店</td>
-                    <td>在柏林的老牌中餐馆品尝北京菜和四川菜。推荐北京烤鸭、水煮鱼等招牌菜。</td>
-                </tr>
-                <tr>
-                    <td>20:00 - 24:00</td>
-                    <td>Vabali Spa 养生之旅</td>
-                    <td>在柏林市中心的巴厘岛风情温泉桑拿会馆放松身心。<span class="highlight">建议提前预约</span>！体验多种桑拿房、泳池和休闲区域。推荐参加每小时的"Aufguss"香薰增温仪式。<br>票价：4小时票周末/假日€39.50。<span class="highlight">温馨提示：德国桑拿传统为裸浴混浴制，桑拿和泳池区域禁止穿泳衣</span></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="day-content">
+            <div class="schedule">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="time">时间</th>
+                            <th class="activity">活动</th>
+                            <th class="details">详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10:00 - 12:00</td>
+                            <td>东边画廊 (East Side Gallery)</td>
+                            <td>参观柏林墙最长的遗迹段落，欣赏118位艺术家创作的壁画，包括著名的"领导人的拥吻"等作品。</td>
+                        </tr>
+                        <tr>
+                            <td>12:00 - 12:30</td>
+                            <td>Tränenpalast (眼泪宫殿)</td>
+                            <td>参观这座历史性的边境检查站，曾是冷战期间东西柏林居民分离的地方，现为博物馆展示德国分裂历史。位于Friedrichstraße火车站旁。</td>
+                        </tr>
+                        <tr>
+                            <td>12:30 - 13:30</td>
+                            <td>快餐体验 @ Curry 36</td>
+                            <td>品尝柏林特色小吃 - 咖喱香肠 (Currywurst)，感受当地街头美食文化。</td>
+                        </tr>
+                        <tr>
+                            <td>14:00 - 15:00</td>
+                            <td>查理检查站 (Checkpoint Charlie)</td>
+                            <td>参观冷战时期美苏占领区之间的著名边境检查站旧址，拍照留念。可选择参观旁边的小型博物馆。</td>
+                        </tr>
+                        <tr>
+                            <td>15:30 - 17:00</td>
+                            <td>柏林墙纪念公园</td>
+                            <td>参观保存完好的柏林墙遗址，了解冷战时期东西柏林分裂的历史。参观纪念公园、展览和纪念碑。</td>
+                        </tr>
+                        <tr>
+                            <td>17:30 - 19:30</td>
+                            <td>晚餐 @ Ming Dynastie West Berlin</td>
+                            <td>在柏林西区的明朝餐厅品尝正宗中餐。推荐北京烤鸭、水煮鱼等招牌菜。位于Kantstraße 134号，是柏林最受欢迎的中餐馆之一。</td>
+                        </tr>
+                        <tr>
+                            <td>20:00 - 24:00</td>
+                            <td>Vabali Spa 养生之旅</td>
+                            <td>在柏林市中心的巴厘岛风情温泉桑拿会馆放松身心。<span class="highlight">建议提前预约</span>！体验多种桑拿房、泳池和休闲区域。推荐参加每小时的"Aufguss"香薰增温仪式。<br>票价：4小时票周末/假日€39.50。<span class="highlight">温馨提示：德国桑拿传统为裸浴混浴制，桑拿和泳池区域禁止穿泳衣</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="map-day3" class="map-container"></div>
+        </div>
         
         <!-- 第四天 -->
         <h2 class="day-title">第四天 (4月21日，周一 - 复活节)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class="time">时间</th>
-                    <th class="activity">活动</th>
-                    <th class="details">详情</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10:00 - 12:00</td>
-                    <td>御林广场 (Gendarmenmarkt)</td>
-                    <td>游览柏林最美丽的广场之一，欣赏两座相对的德法大教堂和中央音乐厅构成的和谐画面。</td>
-                </tr>
-                <tr>
-                    <td>12:30 - 14:00</td>
-                    <td>午餐 @ Jolly 餐厅</td>
-                    <td>在著名中餐馆用餐。推荐尝试北京烤鸭和广式点心。</td>
-                </tr>
-                <tr>
-                    <td>14:30 - 16:30</td>
-                    <td>博物馆岛补充参观</td>
-                    <td>利用复活节假日特殊开放时间，补充参观博物馆岛上错过的展馆，如老国家美术馆或老博物馆。您的博物馆岛通票可能仍然有效（如购买了柏林通票）。</td>
-                </tr>
-
-            </tbody>
-        </table>
+        <div class="day-content">
+            <div class="schedule">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="time">时间</th>
+                            <th class="activity">活动</th>
+                            <th class="details">详情</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10:00 - 12:00</td>
+                            <td>御林广场 (Gendarmenmarkt)</td>
+                            <td>游览柏林最美丽的广场之一，欣赏两座相对的德法大教堂和中央音乐厅构成的和谐画面。</td>
+                        </tr>
+                        <tr>
+                            <td>12:30 - 14:00</td>
+                            <td>午餐 @ Jolly 餐厅</td>
+                            <td>在著名中餐馆用餐。推荐尝试北京烤鸭和广式点心。</td>
+                        </tr>
+                        <tr>
+                            <td>14:30 - 16:30</td>
+                            <td>博物馆岛补充参观</td>
+                            <td>利用复活节假日特殊开放时间，补充参观博物馆岛上错过的展馆，如老国家美术馆或老博物馆。您的博物馆岛通票可能仍然有效（如购买了柏林通票）。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="map-day4" class="map-container"></div>
+        </div>
         
         <div class="note">
             <p><strong>重要提示：</strong></p>
@@ -266,5 +316,115 @@
             </ul>
         </div>
     </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // 定义柏林的中心坐标
+        const berlinCenter = [52.5200, 13.4050];
+        
+        // 希尔顿柏林酒店的坐标
+        const hiltonBerlin = { name: "希尔顿柏林酒店 (Hilton Berlin)", coords: [52.5127, 13.3907], type: "hotel" };
+        
+        // 第一天的地点
+        const day1Locations = [
+            hiltonBerlin, // 从酒店出发
+            { name: "勃兰登堡门", coords: [52.5163, 13.3777], type: "attraction" },
+            { name: "Zur letzten Instanz餐厅", coords: [52.5167, 13.4122], type: "restaurant" },
+            hiltonBerlin  // 返回酒店
+        ];
+        
+        // 第二天的地点
+        const day2Locations = [
+            hiltonBerlin, // 从酒店出发
+            { name: "国会大厦", coords: [52.5186, 13.3762], type: "attraction" },
+            { name: "大屠杀纪念碑", coords: [52.5139, 13.3789], type: "attraction" },
+            { name: "Maximilians Restaurant", coords: [52.5128, 13.3909], type: "restaurant" },
+            { name: "博物馆岛", coords: [52.5169, 13.4010], type: "attraction" },
+            { name: "柏林烧烤匠", coords: [52.5203, 13.4071], type: "restaurant" },
+            { name: "Zig Zag Jazz Club", coords: [52.4998, 13.4214], type: "entertainment" },
+            hiltonBerlin  // 返回酒店
+        ];
+        
+        // 第三天的地点
+        const day3Locations = [
+            hiltonBerlin, // 从酒店出发
+            { name: "东边画廊", coords: [52.5050, 13.4397], type: "attraction" },
+            { name: "Tränenpalast (眼泪宫殿)", coords: [52.5199, 13.3869], type: "attraction" },
+            { name: "Curry 36", coords: [52.4940, 13.3876], type: "restaurant" },
+            { name: "查理检查站", coords: [52.5074, 13.3904], type: "attraction" },
+            { name: "柏林墙纪念公园", coords: [52.5353, 13.3868], type: "attraction" },
+            { name: "Ming Dynastie West Berlin", coords: [52.5045, 13.3194], type: "restaurant" },
+            { name: "Vabali Spa", coords: [52.5272, 13.3604], type: "wellness" },
+            hiltonBerlin  // 返回酒店
+        ];
+        
+        // 第四天的地点
+        const day4Locations = [
+            hiltonBerlin, // 从酒店出发
+            { name: "御林广场", coords: [52.5135, 13.3920], type: "attraction" },
+            { name: "Jolly 餐厅", coords: [52.5098, 13.3827], type: "restaurant" },
+            { name: "博物馆岛", coords: [52.5169, 13.4010], type: "attraction" },
+            hiltonBerlin  // 返回酒店
+        ];
+        
+        // 创建图标
+        function createIcon(type) {
+            const iconUrls = {
+                'hotel': 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
+                'attraction': 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+                'restaurant': 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                'entertainment': 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+                'wellness': 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png'
+            };
+            
+            return L.icon({
+                iconUrl: iconUrls[type] || iconUrls['attraction'],
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34]
+            });
+        }
+        
+        // 初始化地图并添加标记
+        function initMap(mapId, locations, center = berlinCenter, zoom = 12) {
+            const map = L.map(mapId).setView(center, zoom);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // 添加地点标记
+            const markers = [];
+            locations.forEach((location, index) => {
+                const marker = L.marker(location.coords, {
+                    icon: createIcon(location.type),
+                    title: location.name
+                }).addTo(map);
+                
+                marker.bindPopup(`<b>${index + 1}. ${location.name}</b>`);
+                markers.push(marker);
+            });
+            
+            // 连接点的路线
+            const polyline = L.polyline(locations.map(loc => loc.coords), {color: '#3498db', weight: 3}).addTo(map);
+            
+            // 调整地图视图以适应所有标记
+            if (markers.length > 0) {
+                const group = L.featureGroup(markers);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+            
+            return map;
+        }
+        
+        // 初始化所有地图
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap('map-day1', day1Locations);
+            initMap('map-day2', day2Locations);
+            initMap('map-day3', day3Locations);
+            initMap('map-day4', day4Locations);
+        });
+    </script>
 </body>
 </html> 
